@@ -32,9 +32,14 @@ export default function RootLayout() {
         <Stack 
         screenOptions={{
           headerShown: false,
+          animation: "slide_from_bottom",
+          statusBarAnimation: "slide",
+          animationMatchesGesture: true
         }}
         >
           <Stack.Screen name='(tabs)' options={{headerShown: false}} />
+          <Stack.Screen name='(auth)' options={{headerShown: false}} />
+          <Stack.Screen name='(quiz)' options={{headerShown: false}} />
           <Stack.Screen name="+not-found" />
         </Stack>
       </ThemeProvider>

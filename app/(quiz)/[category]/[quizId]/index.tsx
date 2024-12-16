@@ -12,6 +12,7 @@ import { Linking } from "react-native";
 import { useSearchParams } from "expo-router/build/hooks";
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { useTheme } from "@react-navigation/native";
+import { ThemedButton } from "@/components/ThemedButton";
 
 type Question = {
   text: string;
@@ -31,7 +32,6 @@ export default function QuizScreen() {
   const {dark} = useTheme()
 
   const [selectedAnswers, setSelectedAnswers] = useState<(number|null)[]>([]);
-  const [answeredQuestions, setAnsweredQuestions] = useState<number[]>([]);
   const [submitted, setSubmitted] = useState(false);
   const [score, setScore] = useState(0);
   const [questions, setQuestions] = useState<Question[]>([]);
@@ -43,7 +43,6 @@ export default function QuizScreen() {
 
   const params = useSearchParams();
   const quizId = params.get("quizId");
-  const category = params.get("category");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -127,17 +126,17 @@ export default function QuizScreen() {
 
   if (questions.length === 0) {
     return (
-      <ThemedView style={colorScheme === "dark" ? styles.darkContainer : styles.lightContainer}>
-        <Text>No questions found for this quiz.</Text>
+      <ThemedView style={[colorScheme === "dark" ? styles.darkContainer : styles.lightContainer, styles.notFoundStyle]}>
+        <ThemedText style={styles.notFoundTextStyle}>Sorry, No questions found for this quiz currently.</ThemedText>
+        <ThemedButton onPress={()=>{
+          router.back()
+        }} title="Go Back" isLoading={false}></ThemedButton>
       </ThemedView>
     );
   }
 
   return (
     <ThemedView style={colorScheme === "dark" ? styles.darkContainer : styles.lightContainer}>
-      <ThemedView style={styles.headerStyle}>
-        <ThemedText style={styles.headerText}>{category}</ThemedText>
-      </ThemedView>
       <ScrollView ref={scrollViewRef} contentContainerStyle={styles.scrollContainer}>
         {/* Progress Bar */}
         <View style={styles.progressContainer}>
@@ -302,6 +301,16 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 10,
     backgroundColor: Colors.light.background,
+  },
+  notFoundStyle: {
+    display: "flex",
+    justifyContent: "center",
+    textAlign: "center",
+    padding: 20
+  },
+  notFoundTextStyle: {
+    fontWeight: "800",
+    fontSize: 14
   },
   scrollContainer: {
     paddingBottom: 2,

@@ -65,11 +65,15 @@ export default function TabTwoScreen() {
 
   return (
     <ThemedView style={styles.container}>
+
+      <ThemedView style={styles.headingContainer}>
+        <ThemedText style={styles.headingStyle}>Register</ThemedText>
+      </ThemedView>
     
       <ThemedView>
-        <ThemedInputBox label='Name' setState={setName} icon='person-circle-outline' value={name}></ThemedInputBox>
-        <ThemedInputBox label='Email' setState={setEmail} icon='mail-outline' value={email}></ThemedInputBox>
-        <ThemedInputBox label='Password' setState={setPassword} icon='password' value={password}></ThemedInputBox>
+        <ThemedInputBox style={styles.inputStyle} label='Name' setState={setName} icon='person-circle-outline' value={name}></ThemedInputBox>
+        <ThemedInputBox style={styles.inputStyle} label='Email' setState={setEmail} icon='mail-outline' value={email}></ThemedInputBox>
+        <ThemedInputBox style={styles.inputStyle} label='Password' setState={setPassword} icon='password' value={password}></ThemedInputBox>
 
         {(message!='')? 
         <ThemedView style={styles.messageStyle}>
@@ -108,9 +112,23 @@ const styles = StyleSheet.create({
     display: 'flex',
     justifyContent: 'center',
     flexDirection: 'column',
-    padding: 36,
+    padding: 30,
     gap: 1,
     flex: 1,
+  },
+  headingContainer: {
+    display: "flex",
+  },
+  headingStyle: {
+    textAlign: "center",
+    fontSize: 30,
+    fontWeight: "900",
+    padding: 20
+  },
+  inputStyle: {
+    padding: 10,
+    borderRadius: 8,
+    fontSize: 18
   },
   messageStyle: {
     display:'flex',

@@ -45,20 +45,20 @@ export const ThemedInputBox = React.memo(({
       {label=='Password'? 
         <TextInput 
           secureTextEntry={true}
-          style={{...styles.textInput, 
+          style={[{...styles.textInput,
             backgroundColor: dark? "#575656": "#ededed",
             color: dark? "#ffffff": "#000000"
-          }}
+          }, style]}
           placeholder={placeholder}
           onChangeText={(text: string)=>{setState(text)}}
           value={value}
           ></TextInput> 
         :
         <TextInput 
-        style={{...styles.textInput, 
+        style={[{...styles.textInput, 
           backgroundColor: dark? "#575656": "#ededed",
           color: dark? "#ffffff": "#000000"
-        }}
+        }, style]}
         placeholder={placeholder}
         placeholderTextColor={dark ? "#bfbfbf" : "#adadad"}
         onChangeText={(text: string)=>{setState(text)}}
